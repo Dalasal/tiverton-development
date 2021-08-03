@@ -1,4 +1,7 @@
 <?php
+require get_template_directory() . '/custom-function-part.php';
+add_filter('show_admin_bar', '__return_false');
+
 
 if (!function_exists('dd')) {
     function dd()
@@ -36,19 +39,30 @@ function fc_custom_register_acf_blocks()
 
 add_action('acf/init', 'fc_custom_register_acf_blocks');
 
-function tiverton_theme_setup() {
-    register_nav_menus( array(
-        'header' => 'Header menu',
-        'footer' => 'Footer menu'
-    ) );
+/**
+ * Enable ACF Blocks render function
+ */
+if (!function_exists('theme_acf_blocks_render_callback')) {
+
+    function theme_acf_blocks_render_callback($block)
+    {
+        $slug = str_replace('acf/', '', $block['name']);
+        $slug = str_replace('acf-block-', '', $slug);
+
+        if (file_exists(get_theme_file_path("/blocks/acf-block-{$slug}.php"))) {
+            include(get_theme_file_path("/blocks/acf-block-{$slug}.php"));
+        }
+    }
+
 }
 
-add_action( 'after_setup_theme', 'tiverton_theme_setup' );
+function norskgolf_setup()
+{
+    register_nav_menu('main-menu', 'Main Menu');
+}
 
-register_nav_menus( array(
-    'header' => 'Header menu',
-    'footer' => 'Footer menu'
-) );
+add_action('after_setup_theme', 'norskgolf_setup');
+
 
 if (function_exists('acf_add_options_page')) {
 
@@ -68,36 +82,3 @@ function theme_name_scripts_child()
 }
 
 add_action('wp_enqueue_scripts', 'theme_name_scripts_child');
-
-
-function myplugin_register_settings() {
-    add_option( 'myplugin_option_name', 'This is my option value.');
-    register_setting( 'myplugin_options_group', 'myplugin_option_name', 'myplugin_callback' );
-}
-add_action( 'admin_init', 'myplugin_register_settings' );
-
-function myplugin_register_options_page() {
-    add_options_page('Page Title', 'Add Discount By Country', 'manage_options', 'myplugin', 'myplugin_options_page');
-}
-add_action('admin_menu', 'myplugin_register_options_page');
-
-function myplugin_options_page()
-{
-    ?>
-    <div>
-        <h2>My Plugin Page Title</h2>
-        <form method="post" action="options.php">
-            <?php settings_fields( 'myplugin_options_group' ); ?>
-            <h3>This is my option</h3>
-            <p>Some text here.</p>
-            <table>
-                <tr valign="top">
-                    <th scope="row"><label for="myplugin_option_name">Label</label></th>
-                    <td><input type="text" id="myplugin_option_name" name="myplugin_option_name" value="<?php echo get_option('myplugin_option_name'); ?>" /></td>
-                </tr>
-            </table>
-            <?php  submit_button(); ?>
-        </form>
-    </div>
-    <?php
-}

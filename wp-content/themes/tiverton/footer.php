@@ -1,3 +1,21 @@
 <?php
 
-echo 222;
+?>
+
+<footer>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+    <div class="footer">11111111</div>
+</footer>
+</div>
+</body>
