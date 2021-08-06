@@ -31,7 +31,7 @@ $site_info = get_fields('option');
                     <div class="nav-header">
                         <div class="header-wrapper">
                             <div class="header-wrapper__logo">
-                                <img src="<?php echo $site_info["site_info"]["site_logo"]; ?>" alt="<?php echo $site_info["site_info"]["alt_logo"]; ?>">
+                                <a href="<?php echo site_url();?>"><img src="<?php echo $site_info["site_info"]["site_logo"]; ?>" alt="<?php echo $site_info["site_info"]["alt_logo"]; ?>"></a>
                             </div>
                             <div class="header-wrapper__menu">
                                 <?php
@@ -42,6 +42,11 @@ $site_info = get_fields('option');
                                     'menu_class'      => 'nav-list-header',
                                 ]);
                                 ?>
+                            </div>
+                            <div class="mobile-menu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
                             </div>
                         </div>
                     </div>

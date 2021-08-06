@@ -1,7 +1,7 @@
 <?php
 require get_template_directory() . '/custom-function-part.php';
 add_filter('show_admin_bar', '__return_false');
-
+add_theme_support( 'post-thumbnails' );
 
 if (!function_exists('dd')) {
     function dd()
@@ -18,7 +18,10 @@ function fc_custom_register_acf_blocks()
 {
     $acfBlocks = [
         'acf_block_hero'       => 'Hero Module',
-        'acf_block_what_we_do' => 'What we Do',
+        'acf_block_what' => 'What we Do',
+        'acf_block_request' => 'Request',
+        'acf_block_industries' => 'Industries',
+        'acf_block_subpage' => 'Subpage',
     ];
 
     foreach ($acfBlocks as $name => $title) {
@@ -56,12 +59,14 @@ if (!function_exists('theme_acf_blocks_render_callback')) {
 
 }
 
-function norskgolf_setup()
+function tiverton_setup()
 {
     register_nav_menu('main-menu', 'Main Menu');
+    register_nav_menu('menu-footer-first', 'Footer menu first');
+    register_nav_menu('menu-footer-second', 'Footer menu second');
 }
 
-add_action('after_setup_theme', 'norskgolf_setup');
+add_action('after_setup_theme', 'tiverton_setup');
 
 
 if (function_exists('acf_add_options_page')) {
@@ -78,6 +83,7 @@ if (function_exists('acf_add_options_page')) {
 function theme_name_scripts_child()
 {
     wp_enqueue_style('app-style', get_stylesheet_directory_uri() . '/dest/app.css');
+    wp_enqueue_script('app-script', get_stylesheet_directory_uri() . '/assets/js/app.js');
 
 }
 
