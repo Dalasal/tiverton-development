@@ -38,11 +38,36 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     footerManuTitle.forEach((el, i) => {
         el.addEventListener('click', function () {
-            console.log(111);
             var nextBlock = this.nextElementSibling;
             nextBlock.classList.toggle('active');
         });
     });
 
 
+    // Add Padding On Subpage
+    var padding = (window.innerWidth - 1441) / 2;
+    var addPadding = document.querySelectorAll('.subpage-description');
+    var addPaddingRight = document.querySelectorAll('.subpage-description-right');
+    console.log(addPaddingRight);
+    addPadding.forEach(e => {
+        e.style.paddingLeft = padding + 'px';
+    })
+
+    addPaddingRight.forEach(right => {
+        right.style.paddingRight = padding + 'px';
+    })
+
 });
+
+window.addEventListener(`resize`, event => {
+    var padding = (window.innerWidth - 1441) / 2;
+    var addPadding = document.querySelectorAll('.subpage-description');
+    addPadding.forEach(element => {
+        element.style.paddingLeft = padding + 'px';
+    })
+
+    var addPaddingRight = document.querySelectorAll('.subpage-description-right');
+    addPaddingRight.forEach(elementRight => {
+        elementRight.style.paddingRight = padding + 'px';
+    })
+}, false);
